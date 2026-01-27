@@ -1,204 +1,178 @@
 import React, { useState } from 'react';
-import { Pin, X, Calendar, Clock, Tag } from 'lucide-react';
+import { Pin, X, Calendar, Clock, Tag, Instagram, ArrowRight } from 'lucide-react';
 import Template from './Template';
 
+// Data Source with 4 real-world items
 const eventosData = [
     {
         id: 1,
-        title: "Bazar Beneficente",
-        frequency: "Mensal (Todo 2º Sábado)",
-        description: "Um evento comunitário onde oferecemos roupas, calçados e utensílios a preços acessíveis para a comunidade. Toda a renda é revertida para manutenção dos projetos sociais do instituto.",
+        title: "Bazar ICP",
+        description: "Venda de roupas e itens seminovos com preços acessíveis para toda a comunidade.",
+        frequency: "Edições Periódicas",
         category: "Comunidade",
         color: "bg-yellow-100",
         rotation: "rotate-2"
     },
     {
         id: 2,
-        title: "Café com Música",
-        frequency: "Trimestral",
-        description: "Tarde de música ao vivo e confraternização. Um espaço para revelar talentos locais e promover a cultura na nossa região, acompanhado de um delicioso café da tarde.",
-        category: "Cultura",
+        title: "Oficinas de Capacitação",
+        description: "Cursos rápidos e atividades práticas focadas em desenvolvimento de habilidades.",
+        frequency: "Verifique nosso Instagram",
+        category: "Educação",
         color: "bg-blue-100",
         rotation: "-rotate-1"
     },
     {
         id: 3,
-        title: "Mutirão da Saúde",
-        frequency: "Semestral",
-        description: "Em parceria com profissionais voluntários, oferecemos aferição de pressão, teste de glicemia e orientações básicas de saúde para idosos e crianças da comunidade.",
-        category: "Saúde",
+        title: "Projeto Caravana Pet",
+        description: "Projeto criado junto da UFRRJ e o Ministério da Educação com o objetivo de oferecer o serviço de castração para animais domésticos (cães e gatos) de forma gratuita.",
+        frequency: "Acompanhe as Datas",
+        category: "Saúde Animal",
         color: "bg-green-100",
-        rotation: "rotate-3"
-    },
-    {
-        id: 4,
-        title: "Dia das Crianças e Lazer",
-        frequency: "Anual",
-        description: "Uma grande festa dedicada aos pequenos, com brincadeiras, distribuição de brinquedos, lanches e muita diversão. Um dia inesquecível para celebrar a infância.",
-        category: "Infantil",
-        color: "bg-pink-100",
-        rotation: "-rotate-2"
-    },
-    {
-        id: 5,
-        title: "Oficina de Artesanato",
-        frequency: "Semanal (Quartas-feiras)",
-        description: "Aprenda técnicas manuais e desenvolva novas habilidades. Nossas oficinas visam não apenas o lazer, mas também a geração de renda extra para as famílias participantes.",
-        category: "Capacitação",
-        color: "bg-purple-100",
         rotation: "rotate-1"
     },
     {
-        id: 6,
-        title: "Sopão Solidário",
-        frequency: "Semanal (Sextas-feiras)",
-        description: "Distribuição de sopas nutritivas para famílias em situação de vulnerabilidade social. Mais do que alimento, entregamos carinho e esperança.",
-        category: "Social",
-        color: "bg-orange-100",
-        rotation: "-rotate-3"
+        id: 4,
+        title: "Feiras",
+        description: "Feiras Temáticas acontecem no Instituto com o objetivo de mostrar diversas culturas e serviços com preços populares.",
+        frequency: "Eventos Especiais",
+        category: "Cultura",
+        color: "bg-pink-100",
+        rotation: "-rotate-2"
     }
 ];
 
 const Eventos = () => {
     const [selectedEvent, setSelectedEvent] = useState(null);
 
-    // Function to get distinct rotation class if not in data, but data has it. 
-    // Just in case we didn't add it to all items, fallback:
-    const getRotation = (index) => {
-        const rotations = ['rotate-1', '-rotate-1', 'rotate-2', '-rotate-2', 'rotate-3', '-rotate-3'];
-        return rotations[index % rotations.length];
-    };
-
-    const getColors = (index) => {
-        const colors = ['bg-yellow-100', 'bg-blue-100', 'bg-green-100', 'bg-pink-100', 'bg-orange-100', 'bg-purple-100'];
-        return colors[index % colors.length];
-    }
-
     return (
         <Template title="Mural de Eventos">
-            <div className="relative">
-                {/* Introduction Text */}
-                <div className="text-center max-w-2xl mx-auto mb-16">
-                    <p className="text-lg text-slate-600 leading-relaxed">
-                        Fique por dentro das nossas atividades! Aqui no <span className="font-semibold text-institutional-orange">Mural da Comunidade</span>,
-                        você encontra os próximos eventos e ações sociais. Clique nos post-its para saber mais.
-                    </p>
+            <div className="relative min-h-screen">
+                
+                {/* Introduction / Pinned Announcement Section */}
+                <div className="max-w-4xl mx-auto mb-16 px-4">
+                    {/* The Pinned Note */}
+                    <div className="relative transform -rotate-1 mx-auto max-w-2xl">
+                        {/* Pin Visual */}
+                        <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 z-20">
+                            <Pin className="w-10 h-10 text-red-600 drop-shadow-md fill-current" />
+                        </div>
+                        
+                        <div className="bg-orange-200 p-8 pt-10 rounded-sm shadow-xl border-t border-white/40">
+                            <h3 className="text-xl font-bold text-orange-900 mb-3 text-center uppercase tracking-wide flex items-center justify-center gap-2">
+                                <span className="text-2xl">⚠️</span> Importante
+                            </h3>
+                            <p className="text-orange-950 text-center font-medium text-lg leading-relaxed font-marker">
+                                "Nossas atividades são dinâmicas! Para saber se um evento vai acontecer esta semana, confirme sempre as datas e horários no nosso Instagram oficial."
+                            </p>
+                            
+                            <div className="mt-6 flex justify-center">
+                                <a 
+                                    href="https://www.instagram.com/instituto_casadopai/" 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                    className="flex items-center gap-2 px-6 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full font-bold shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all text-sm"
+                                >
+                                    <Instagram size={18} />
+                                    Seguir no Instagram
+                                </a>
+                            </div>
+                        </div>
+                        
+                        {/* Shadow/Tape styling for realism */}
+                         <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 w-24 h-8 bg-white/20 rotate-1 backdrop-blur-sm"></div>
+                    </div>
                 </div>
 
-                {/* Mural Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 px-4 pb-12">
-                    {eventosData.map((evento, index) => {
-                        const rotationClass = evento.rotation || getRotation(index);
-                        const bgColor = evento.color || getColors(index);
+                {/* Main Events Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-8 px-4 max-w-7xl mx-auto pb-20">
+                    {eventosData.map((evento) => (
+                        <div
+                            key={evento.id}
+                            onClick={() => setSelectedEvent(evento)}
+                            className={`
+                                group relative cursor-pointer 
+                                ${evento.color}
+                                ${evento.rotation}
+                                p-6 rounded-sm shadow-md 
+                                transition-all duration-300 ease-spring
+                                hover:rotate-0 hover:scale-105 hover:shadow-2xl hover:z-10
+                                flex flex-col h-full min-h-[300px]
+                            `}
+                        >
+                            {/* Tape Visual */}
+                            <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 w-12 h-6 bg-yellow-50/50 rotate-3 shadow-sm border-l border-r border-white/20"></div>
 
-                        return (
-                            <div
-                                key={evento.id}
-                                onClick={() => setSelectedEvent(evento)}
-                                className={`
-                                    group relative cursor-pointer 
-                                    ${bgColor} 
-                                    p-6 pt-12 rounded-sm shadow-md hover:shadow-xl
-                                    transform transition-all duration-300 ease-out
-                                    ${rotationClass} hover:rotate-0 hover:scale-105 hover:z-10
-                                    min-h-[280px] flex flex-col
-                                `}
-                            >
-                                {/* Push Pin */}
-                                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 z-20">
-                                    <div className="relative">
-                                        <div className="w-4 h-4 rounded-full bg-red-500 shadow-sm border border-red-700 absolute top-1 left-1.5 animate-pulse"></div>
-                                        <Pin className="w-8 h-8 text-red-600 drop-shadow-md fill-current" />
-                                    </div>
-                                </div>
+                            {/* Card Content */}
+                            <div className="flex-1 flex flex-col text-center pt-4">
+                                <span className="text-xs font-bold uppercase tracking-wider text-slate-600 mb-2 opacity-70">
+                                    {evento.category}
+                                </span>
+                                
+                                <h3 className="text-xl font-bold text-slate-800 mb-4 font-marker leading-tight">
+                                    {evento.title}
+                                </h3>
 
-                                {/* Tape effect (optional aesthetic touch for realism) */}
-                                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 w-16 h-8 bg-white/30 backdrop-blur-sm rotate-2 opacity-60"></div>
-
-                                {/* Content */}
-                                <div className="flex-1 flex flex-col items-center text-center space-y-4 font-marker">
-                                    <span className="inline-block px-3 py-1 bg-white/60 rounded-full text-xs font-bold uppercase tracking-wider text-slate-700 mb-2 border border-slate-200/50">
-                                        {evento.category}
-                                    </span>
-
-                                    <h3 className="text-2xl font-bold text-slate-800 leading-tight handwriting-font">
-                                        {evento.title}
-                                    </h3>
-
-                                    <div className="flex items-center justify-center space-x-2 text-slate-600 text-sm font-medium mt-auto pt-4 border-t border-slate-900/10 w-full">
-                                        <Clock size={16} />
-                                        <span>{evento.frequency}</span>
-                                    </div>
-
-                                    <p className="text-xs text-slate-500 mt-2 italic opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                        Clique para detalhes
+                                <div className="mt-auto space-y-3">
+                                    <p className="text-sm text-slate-700 font-medium line-clamp-3 leading-relaxed">
+                                        {evento.description}
                                     </p>
+                                    
+                                    <div className="pt-4 border-t border-slate-900/5">
+                                        <div className="inline-flex items-center justify-center gap-1.5 px-3 py-1 bg-white/50 rounded-full text-xs font-bold text-slate-600">
+                                            <Tag size={12} />
+                                            {evento.frequency}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        );
-                    })}
+                        </div>
+                    ))}
                 </div>
 
-                {/* Modal */}
+                {/* Modal for Details */}
                 {selectedEvent && (
                     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-                        {/* Backdrop */}
-                        <div
-                            className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm transition-opacity"
+                        <div 
+                            className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity"
                             onClick={() => setSelectedEvent(null)}
                         ></div>
 
-                        {/* Modal Content */}
-                        <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden transform transition-all animate-fadeIn">
-                            {/* Header Stripe */}
-                            <div className={`h-4 w-full ${selectedEvent.color || 'bg-institutional-orange'}`}></div>
+                        <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden animate-fadeIn">
+                            {/* Header Color Stripe */}
+                            <div className={`h-3 w-full ${selectedEvent.color}`}></div>
 
                             <button
                                 onClick={() => setSelectedEvent(null)}
-                                className="absolute top-4 right-4 p-2 bg-slate-100 hover:bg-slate-200 rounded-full transition-colors text-slate-500 hover:text-red-500"
+                                className="absolute top-5 right-5 p-2 bg-slate-100 hover:bg-slate-200 rounded-full text-slate-500 hover:text-red-500 transition-colors"
                             >
                                 <X size={20} />
                             </button>
 
-                            <div className="p-8">
-                                <div className="flex items-center space-x-3 mb-6">
-                                    <div className={`p-3 rounded-lg ${selectedEvent.color || 'bg-slate-100'} bg-opacity-50`}>
-                                        <Calendar className="w-6 h-6 text-slate-700" />
-                                    </div>
-                                    <div>
-                                        <span className="text-sm font-bold text-institutional-orange uppercase tracking-wide block">
-                                            {selectedEvent.category}
-                                        </span>
-                                        <h2 className="text-3xl font-bold text-slate-800">
-                                            {selectedEvent.title}
-                                        </h2>
-                                    </div>
+                            <div className="p-8 pt-10">
+                                <span className="inline-block px-3 py-1 bg-slate-100 rounded-lg text-xs font-bold uppercase text-slate-500 mb-4">
+                                    {selectedEvent.category}
+                                </span>
+                                
+                                <h2 className="text-3xl font-bold text-slate-800 mb-2 font-marker">
+                                    {selectedEvent.title}
+                                </h2>
+                                
+                                <div className="flex items-center gap-2 text-institutional-orange font-semibold text-sm mb-6">
+                                    <Clock size={16} />
+                                    {selectedEvent.frequency}
                                 </div>
 
                                 <div className="space-y-6">
-                                    <div className="flex items-start space-x-3 p-4 bg-slate-50 rounded-xl border border-slate-100">
-                                        <Clock className="w-5 h-5 text-institutional-blue mt-0.5" />
-                                        <div>
-                                            <h4 className="font-semibold text-slate-700 text-sm">Frequência</h4>
-                                            <p className="text-slate-600">{selectedEvent.frequency}</p>
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <h4 className="font-semibold text-slate-700 mb-2 flex items-center gap-2">
-                                            <Tag size={18} />
-                                            Sobre o Evento
-                                        </h4>
-                                        <p className="text-slate-600 leading-relaxed text-justify">
-                                            {selectedEvent.description}
-                                        </p>
+                                    <div className="p-6 bg-slate-50 rounded-xl border border-slate-100 text-slate-600 leading-relaxed text-lg">
+                                        {selectedEvent.description}
                                     </div>
 
                                     <button
                                         onClick={() => setSelectedEvent(null)}
-                                        className="w-full py-3 bg-institutional-blue hover:bg-blue-700 text-white font-semibold rounded-xl transition-colors shadow-lg shadow-blue-200"
+                                        className="w-full py-4 bg-slate-800 hover:bg-slate-900 text-white font-bold rounded-xl transition-all shadow-lg hover:shadow-slate-300 flex items-center justify-center gap-2"
                                     >
-                                        Fechar Detalhes
+                                        Fechar
                                     </button>
                                 </div>
                             </div>
@@ -207,8 +181,18 @@ const Eventos = () => {
                 )}
             </div>
 
-            {/* Custom Animations Styles */}
-            <style>{`
+            {/* Injected Styles for specialized fonts or animations if needed */}
+             <style>{`
+                @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+                
+                .font-marker {
+                    font-family: 'Permanent Marker', cursive, sans-serif;
+                }
+                
+                .ease-spring {
+                    transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                }
+                
                 @keyframes fadeIn {
                     from { opacity: 0; transform: scale(0.95); }
                     to { opacity: 1; transform: scale(1); }
